@@ -127,7 +127,7 @@ class AnnuaireRequestHandler(socketserver.StreamRequestHandler):
     def _send_response(self, response: dict[str, Any]) -> None:
         """Send JSON response to client."""
         try:
-            line = json.dumps(response) + "\\n"
+            line = json.dumps(response) + "\n"
             self.wfile.write(line.encode("utf-8"))
         except Exception as e:
             logger.error(f"Send response error: {e}")
