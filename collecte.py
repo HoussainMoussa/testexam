@@ -50,7 +50,7 @@ def resoudre_ip(hote: str) -> Optional[str]:
             return None
 
         # Parse output to find IPv4 after "Non-authoritative answer" or "Address:"
-        lines = result.stdout.split("\\n")
+        lines = result.stdout.split("\n")
         found_answer = False
         for line in lines:
             if "Non-authoritative answer" in line or "Address:" in line:
@@ -101,13 +101,13 @@ def interroger_whois(hote: str) -> tuple[Optional[str], Optional[str]]:
 
         # Extract contact name
         contact = None
-        for line in output.split("\\n"):
+        for line in output.split("\n"):
             if "Registrant Name:" in line or "Registrant:" in line:
                 contact = line.split(":", 1)[1].strip()
                 break
 
         # Extract first email
-        email_match = re.search(r"\\S+@\\S+", output)
+        email_match = re.search(r"\S+@\S+", output)
         email = email_match.group(0) if email_match else None
 
         logger.debug(f"WHOIS for {hote}: contact={contact}, email={email}")
